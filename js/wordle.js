@@ -61,7 +61,7 @@ function appStart() {
         `.board-block[data-index='${attempts}${index - 1}']`
       );
       preBlock.innerText = "";
-      preBlock.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+      preBlock.style.border = "1px solid rgba(0,0,0,0.1)";
     }
     if (index !== 0) index -= 1;
   };
@@ -101,6 +101,64 @@ function appStart() {
     timer = setInterval(cal_time, 1000);
   };
 
+  const detectAlphabet = () => {
+    for (j = 0; j <= 25; j++) {
+      const alphabets = [
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+        "N",
+        "M",
+      ];
+      const keyBlock = document.querySelector(
+        `.key-block[data-key='${alphabets[j]}']`
+      );
+
+      const handleClick = () => {
+        if (index === 5) return;
+        const thisBlock = document.querySelector(
+          `.board-block[data-index='${attempts}${index}']`
+        );
+        thisBlock.innerText = keyBlock.innerText;
+        thisBlock.style.fontWeight = 700;
+        thisBlock.style.fontSize = "40px";
+        thisBlock.style.border = "1px solid lightgray";
+        index += 1;
+      };
+      keyBlock.addEventListener("click", handleClick);
+    }
+  };
+
+  const enterClick = document.querySelector(
+    `.key-block__enter[data-key='ENTER']`
+  );
+
+  enterClick.addEventListener("click", handleEnterKey);
+
+  const delClick = document.querySelector(`.key-block__del[data-key='del']`);
+  delClick.addEventListener("click", handleBackspace);
+  detectAlphabet();
   startTimer();
   window.addEventListener("keydown", handleKeydown);
 }
@@ -109,5 +167,5 @@ function appStart() {
 appStart();
 
 // 키보드에도 동일하게 표시 완료
-// 키보드 클릭으로 입력 모르겠음
-// 애니메이션 효과
+// 키보드 클릭으로 입력 완료
+// 애니메이션 효과 모르겠음
